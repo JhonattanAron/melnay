@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Heart,
@@ -13,14 +13,19 @@ import {
   Music,
   Volume2,
   VolumeX,
-} from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import Image from "next/image"
-import { useState, useRef, useEffect } from "react"
+} from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Image from "next/image";
+import { useState, useRef, useEffect } from "react";
 
 export default function FarewellPage() {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const playAudio = () => {
@@ -28,32 +33,34 @@ export default function FarewellPage() {
         audioRef.current
           .play()
           .then(() => {
-            setIsPlaying(true)
+            setIsPlaying(true);
           })
           .catch((err) => {
-            console.log("[v0] Auto-playback blocked or failed:", err)
-          })
+            console.log("[v0] Auto-playback blocked or failed:", err);
+          });
       }
-    }
+    };
 
     // Attempt to play immediately
-    playAudio()
+    playAudio();
 
     // Fallback: play on first click if browser blocked auto-play
-    window.addEventListener("click", playAudio, { once: true })
-    return () => window.removeEventListener("click", playAudio)
-  }, [isPlaying])
+    window.addEventListener("click", playAudio, { once: true });
+    return () => window.removeEventListener("click", playAudio);
+  }, [isPlaying]);
 
   const toggleAudio = () => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.pause()
+        audioRef.current.pause();
       } else {
-        audioRef.current.play().catch((err) => console.log("[v0] Playback failed:", err))
+        audioRef.current
+          .play()
+          .catch((err) => console.log("[v0] Playback failed:", err));
       }
-      setIsPlaying(!isPlaying)
+      setIsPlaying(!isPlaying);
     }
-  }
+  };
 
   const lyrics = [
     "Me muerdo los labios y no me importa",
@@ -65,7 +72,7 @@ export default function FarewellPage() {
     "Porque eres como un loco",
     "Que no sabe a dónde va",
     "Me gusta tu forma de ser",
-  ]
+  ];
 
   const points = [
     {
@@ -81,8 +88,9 @@ export default function FarewellPage() {
       content: (
         <div className="space-y-4">
           <p>
-            Hubo muchas veces en las que, aun estando roto por dentro, pensé primero en ti. No siempre lo dije bonito.
-            No siempre lo hice perfecto. Pero lo hice sincero.
+            Hubo muchas veces en las que, aun estando roto por dentro, pensé
+            primero en ti. No siempre lo dije bonito. No siempre lo hice
+            perfecto. Pero lo hice sincero.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
             {[
@@ -105,7 +113,8 @@ export default function FarewellPage() {
             ))}
           </div>
           <p className="pt-4 italic border-t border-primary/10 text-primary/60">
-            No porque fuera fácil. Sino porque me importabas más que mi comodidad.
+            No porque fuera fácil. Sino porque me importabas más que mi
+            comodidad.
           </p>
         </div>
       ),
@@ -160,16 +169,11 @@ export default function FarewellPage() {
         "Mi apego contigo fue desordenado. Lo reconozco. Yo sentía mucho. Pensaba mucho. Necesitaba respuestas. Necesitaba cercanía. No era estrategia. Era miedo.",
       icon: <SunDim className="w-5 h-5 text-accent" />,
     },
-  ]
+  ];
 
   return (
     <main className="relative min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary overflow-hidden">
-      <audio
-        ref={audioRef}
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Los%20Aut%C3%A9nticos%20Decadentes%20-%20Loco%20%28Tu%20Forma%20De%20Ser%29%20%28Letra%29%20%28mp3cut.net%29-pilXEc2OLI72wKQLisZ7RFJ0J5ZaUY.mp3"
-        loop
-        autoPlay
-      />
+      <audio ref={audioRef} src="/audio/audio.mp3" loop autoPlay />
 
       <button
         onClick={toggleAudio}
@@ -211,8 +215,9 @@ export default function FarewellPage() {
               <span className="italic opacity-60">Melany</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed font-light max-w-md">
-              Este es el cierre de una historia que dolió porque importó. Aquí dejo la verdad de lo que sentí, sin
-              filtros, solo con la sinceridad del que amó de verdad.
+              Este es el cierre de una historia que dolió porque importó. Aquí
+              dejo la verdad de lo que sentí, sin filtros, solo con la
+              sinceridad del que amó de verdad.
             </p>
           </div>
           <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] animate-in fade-in zoom-in duration-1000 delay-200">
@@ -227,16 +232,19 @@ export default function FarewellPage() {
         </section>
 
         <div className="flex items-center justify-center gap-4 text-primary/40 text-xs tracking-[0.3em] uppercase">
-          <Music className={`w-4 h-4 ${isPlaying ? "animate-spin-slow" : ""}`} />
-          <span>Los Auténticos Decadentes - Tu forma de ser</span>
+          <Music
+            className={`w-4 h-4 ${isPlaying ? "animate-spin-slow" : ""}`}
+          />
+          <span>Enanitos Verdes - Francés Limón</span>
         </div>
 
         {/* Marquee Text */}
         <div className="w-full border-y border-primary/20 py-6">
           <div className="flex animate-marquee whitespace-nowrap gap-12 text-primary/40 font-serif italic text-2xl uppercase tracking-[0.2em]">
             <span>
-              Todo fue real • Fue sincero • Fue bonito • Te elegí • Todo fue real • Fue sincero • Fue bonito • Te elegí
-              • Todo fue real • Fue sincero • Fue bonito • Te elegí
+              Todo fue real • Fue sincero • Fue bonito • Te elegí • Todo fue
+              real • Fue sincero • Fue bonito • Te elegí • Todo fue real • Fue
+              sincero • Fue bonito • Te elegí
             </span>
           </div>
         </div>
@@ -244,7 +252,9 @@ export default function FarewellPage() {
         {/* Accordion Content */}
         <section className="space-y-16">
           <div className="max-w-xl">
-            <h2 className="text-4xl font-serif text-primary italic">Fragmentos de nuestra historia</h2>
+            <h2 className="text-4xl font-serif text-primary italic">
+              Fragmentos de nuestra historia
+            </h2>
             <div className="w-20 h-px bg-accent mt-4" />
           </div>
           <Accordion type="single" collapsible className="w-full space-y-4">
@@ -273,11 +283,13 @@ export default function FarewellPage() {
           <div className="absolute -top-10 -right-10 w-64 h-64 text-accent/10 rotate-12" />
           <div className="max-w-2xl space-y-8 relative z-10">
             <h3 className="text-4xl font-serif italic leading-snug text-primary">
-              "Tal vez no fue el momento. Tal vez no supimos cómo. Pero esto fue real."
+              "Tal vez no fue el momento. Tal vez no supimos cómo. Pero esto fue
+              real."
             </h3>
             <p className="text-lg text-muted-foreground leading-relaxed font-light">
-              Quería que al menos quedara bien contado. Que supieras que cada palabra, cada insistencia y cada miedo
-              nacía de un lugar genuino. Te imaginé en lo cotidiano, en silencios cómodos, como hogar.
+              Quería que al menos quedara bien contado. Que supieras que cada
+              palabra, cada insistencia y cada miedo nacía de un lugar genuino.
+              Te imaginé en lo cotidiano, en silencios cómodos, como hogar.
             </p>
           </div>
         </section>
@@ -287,11 +299,13 @@ export default function FarewellPage() {
           <div className="max-w-3xl mx-auto space-y-12">
             <div className="space-y-6">
               <p className="text-4xl md:text-6xl font-serif text-primary leading-tight italic px-4">
-                "Te amo Melany, pero no debemos estar juntos. Eso ya es un hecho."
+                "Te amo Melany, pero no debemos estar juntos. Eso ya es un
+                hecho."
               </p>
               <p className="text-xl md:text-2xl font-light text-muted-foreground leading-relaxed px-8">
-                Solo quiero verte una última vez como quedamos, como lo dijimos. Olvidémonos de todo y seamos las
-                personas de las que nos enamoramos, no estas versiones en las que nos convertimos.
+                Solo quiero verte una última vez como quedamos, como lo dijimos.
+                Olvidémonos de todo y seamos las personas de las que nos
+                enamoramos, no estas versiones en las que nos convertimos.
               </p>
             </div>
 
@@ -303,12 +317,14 @@ export default function FarewellPage() {
           <div className="flex flex-col items-center gap-12">
             <div className="w-[1px] h-32 bg-gradient-to-b from-primary/50 to-transparent" />
             <footer className="space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.6em] text-primary/30 font-bold">Fin del capítulo</p>
+              <p className="text-[10px] uppercase tracking-[0.6em] text-primary/30 font-bold">
+                Fin del capítulo
+              </p>
               <Heart className="w-4 h-4 text-primary/20 mx-auto fill-current" />
             </footer>
           </div>
         </section>
       </div>
     </main>
-  )
+  );
 }
